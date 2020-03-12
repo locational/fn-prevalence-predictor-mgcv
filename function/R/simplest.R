@@ -1,0 +1,3 @@
+simplest = function() {
+  return("fine")
+}
