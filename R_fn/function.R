@@ -5,10 +5,10 @@ library(sp)
 library(mgcv) 
 library(RANN)
 
-gam_posterior_metrics <- dget('function/gam_posterior_metrics.R')
-cv_ml <- dget('function/cv_ml.R')
-optimal_range <- dget('function/optimal_range.R')
-choose_batch <- dget('function/choose_batch.R')
+gam_posterior_metrics <- dget('R/gam_posterior_metrics.R')
+cv_ml <- dget('R/cv_ml.R')
+optimal_range <- dget('R/optimal_range.R')
+choose_batch <- dget('R/choose_batch.R')
 
 
 function(params) {
@@ -28,7 +28,7 @@ function(params) {
     }
     
     if(is.null(params$covariate_extractor_url)){
-      covariate_extractor_url <- "https://faas.srv.disarm.io/function/fn-covariate-extractor"
+      covariate_extractor_url <- "https://faas.srv.disarm.io/R/fn-covariate-extractor"
     }else{
       covariate_extractor_url <- params$covariate_extractor_url
     }
