@@ -1,6 +1,6 @@
 FROM openfaas/classic-watchdog:0.18.0 as watchdog
 
-FROM rocker/geospatial
+FROM locational/geopandas-r-base:2.0.0
 
 # Allows you to add additional packages via build-arg
 # ARG ADDITIONAL_PACKAGE
