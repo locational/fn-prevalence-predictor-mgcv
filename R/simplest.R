@@ -1,3 +1,5 @@
+source('R/other.R')
+
 simplest = function() {
-  return("fine")
+  return(other(1))
 }
