@@ -1,3 +1,5 @@
+adder <- dget('function/R/simple_source.R')
+
 simplest = function() {
-  return("fine")
+  return(adder(5))
 }
