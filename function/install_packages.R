@@ -5,15 +5,13 @@
 # Remove from below if you don't need it.
 # install.packages("config",repos="http://cran.us.r-project.org")
 # library(config)
-install.packages(c('geojsonio',
-                   'jsonlite',
-                   'devtools',
-                   'ranger',
-                   'mgcv',
-                   'RANN',
-                   'httr',
-                   'caret',
-                   'parallel',
-                   'spaMM',
-                   'rjson'))
+packages = c('ranger', 'RANN', 'httr', 'caret', 'spaMM')
+
+if (!require("pacman")) {
+  install.packages("pacman",
+    repos = "https://cran.rstudio.com"
+  )
+}
+
+pacman::p_load(char = packages) 
 
