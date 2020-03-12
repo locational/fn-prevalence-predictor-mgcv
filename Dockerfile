@@ -12,31 +12,34 @@ RUN chmod +x /usr/bin/fwatchdog
 # Add non root user
 # RUN addgroup -S app && adduser app -S -G app
 
-WORKDIR /home/app/
 
-COPY main.R             .
+# RUN mkdir -p /app
 
-# RUN chown -R app /home/app
-# USER app
+# COPY ./fwatchdog /usr/bin
+# RUN chmod +x /usr/bin/fwatchdog
+
+WORKDIR /app
+
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
+
+COPY index.py .
+COPY config.py .
+COPY preprocess_helpers.py .
+COPY function function
+RUN pip install -r function/requirements.txt
 
 
-RUN mkdir -p function
+# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
+ENV fprocess="python index.py"
+# Set to true to see request in function logs
+# ENV combine_output='false'
+# # ENV write_debug="true"
+# ENV write_timeout=600
+# ENV read_timeout=600
+# ENV exec_timeout=600
 
-WORKDIR /home/app/function/
-COPY function/install_packages.R function/
-RUN Rscript function/install_packages.R
-
-WORKDIR /home/app/
-
-# USER root
-
-COPY function           function
-
-# USER app
-
-ENV fprocess="Rscript main.R"
 EXPOSE 8080
 
 HEALTHCHECK --interval=3s CMD [ -e /tmp/.lock ] || exit 1
-
-CMD ["fwatchdog"]
+CMD [ "fwatchdog" ]
